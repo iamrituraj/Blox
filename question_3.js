@@ -1,14 +1,14 @@
 const parseJsonString = (jsonString) => {
   try {
     const parsed = JSON.parse(jsonString, (_, value) => {
-      // Check for large integers and convert them to BigInt
+      // Checking for large integers and converting them to BigInt
       if (typeof value === "string" && /^\d{15,}$/.test(value)) {
-        return BigInt(value); // Convert large integers to BigInt
+        return BigInt(value); 
       }
 
-      // Check for floating-point numbers (arbitrary precision isn't possible without external library)
+      // Checking for floating-point numbers (arbitrary precision isn't possible without external library)
       if (typeof value === "string" && /^[0-9]*\.[0-9]+$/.test(value)) {
-        return parseFloat(value); // Use JavaScript's native `parseFloat` for float conversion
+        return parseFloat(value); 
       }
 
       return value;
@@ -24,13 +24,13 @@ const parseJsonString = (jsonString) => {
       return new Map(Object.entries(parsed));
     }
 
-    return parsed; // Return the parsed value directly if it's neither an array nor an object
+    return parsed; // Returning the parsed value directly if it's neither an array nor an object
   } catch (error) {
     throw new Error(`Invalid JSON string: ${error.message}`);
   }
 };
 
-// Example usage
+// Test Cases
 const jsonInput_1 = `
 {
     "largeInt": "123456789012345678901234567890",
